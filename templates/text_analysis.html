@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Analysis</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #45a049;
+  }
+  .clear-button {
+    background-color: #FF5733; /* Red */
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Text Analysis</h1>
+</header>
+
+<div class="container">
+  <!-- Upload file input -->
+  <form id="uploadForm" enctype="multipart/form-data">
+    <label for="fileInput">Upload Text File:</label>
+    <input type="file" id="fileInput" accept=".txt">
+  </form>
+
+  <!-- Text input for user input -->
+  <label for="textInput">Or Enter Text:</label>
+  <textarea id="textInput" name="text" rows="4" cols="150"></textarea>
+
+  <!-- Button container -->
+  <div class="button-container">
+    <!-- Analyze button -->
+    <button type="button" onclick="analyzeText()" class="button">Analyze Text</button>
+
+    <!-- Clear button -->
+    <button type="button" onclick="clearText()" class="button clear-button">Clear</button>
+  </div>
+
+  <!-- Display analysis results -->
+  <div id="analysisResult"></div><br>
+</div>
+
+<!-- Return to Home button -->
+<div class="button-container">
+  <a href="/" class="button">Return to Home</a>
+</div>
+
+<footer>
+  <p>&copy; 2024 AI Services. All rights reserved.</p>
+</footer>
+
+<script>
+// Function to handle file upload and display content in text area
+function handleFileUpload() {
+  var fileInput = document.getElementById('fileInput');
+  var file = fileInput.files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var uploadedText = e.target.result;
+      document.getElementById("textInput").value = uploadedText; // Display uploaded text in text input
+    };
+    reader.readAsText(file);
+  }
+}
+
+// Function to handle text analysis
+function analyzeText() {
+  var textToAnalyze = document.getElementById("textInput").value;
+
+  // Send a POST request to the Flask app for analysis
+  fetch("/analyze", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "text=" + encodeURIComponent(textToAnalyze)
+  })
+  .then(response => response.json())
+  .then(result => {
+    displayAnalysisResult(result);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+// Function to display the analysis result
+function displayAnalysisResult(result) {
+  var analysisResult = "Sentiment: " + result.sentiment + "<br><br>";
+  analysisResult += "Entities: ";
+  result.entities.forEach(function(entity) {
+    analysisResult += entity.Text + " (" + entity.Type + "), ";
+  });
+  analysisResult += "<br><br>Syntax: ";
+  result.syntax_tokens.forEach(function(token) {
+    analysisResult += token.Text + " (" + token.PartOfSpeech.Tag + "), ";
+  });
+  document.getElementById("analysisResult").innerHTML = analysisResult;
+}
+
+// Function to clear the text input and analysis results
+function clearText() {
+  document.getElementById("textInput").value = ""; // Clear text input
+  document.getElementById("analysisResult").innerHTML = ""; // Clear analysis result
+  document.getElementById("fileInput").value = ""; // Clear uploaded file input
+}
+
+// Attach event listener to file input
+document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+
+</script>
+
+</body>
+</html>

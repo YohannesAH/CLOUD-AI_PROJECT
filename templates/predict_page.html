@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Count Prediction</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Add this line to center the content horizontally */
+    position: relative; /* Add this line to make it a positioning context */
+  }
+  .button-container {
+    position: absolute; /* Add this line to position the button container */
+    top: 388px; /* Adjust the top position as needed */
+    left: 50%; /* Center the container horizontally */
+    transform: translateX(-50%); /* Center the container horizontally */
+  }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #45a049;
+  }
+  .prediction-result {
+    font-weight: bold;
+    color: black !important; /* Change the color of the text to black */
+    position: absolute;
+    top: 0;
+    right: -350px; /* Adjust the right position */
+    padding: 10px;
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Page Count Prediction</h1>
+</header>
+
+<div class="container">
+  <label for="genre">Genre:</label>
+  <select id="genre" name="genre">
+    <option value="Fiction">Fiction</option>
+    <option value="Detective and mystery stories">Detective and mystery stories</option>
+    <option value="American fiction">American fiction</option>
+    <option value="Christian life">Christian life</option>
+    <option value="Authors, English">Authors, English</option>
+    <option value="Africa, East">Africa, East</option>
+    <option value="Hyland, Morn (Fictitious character)">Hyland, Morn (Fictitious character)</option>
+    <option value="Adventure stories">Adventure stories</option>
+    <option value="Arthurian romances">Arthurian romances</option>
+    <option value="Fantasy fiction">Fantasy fiction</option>
+    <option value="English drama">English drama</option>
+    <option value="Country life">Country life</option>
+    <option value="English fiction">English fiction</option>
+    <option value="Clergy">Clergy</option>
+    <option value="Aubrey, Jack (Fictitious character)">Aubrey, Jack (Fictitious character)</option>
+    <option value="Detective and mystery stories, English">Detective and mystery stories, English</option>
+    <option value="Black Death">Black Death</option>
+    <option value="Human cloning">Human cloning</option>
+    <option value="Science fiction">Science fiction</option>
+    <option value="Great Britain">Great Britain</option>
+    <option value="American essays">American essays</option>
+    <option value="China">China</option>
+    <option value="Capitalism">Capitalism</option>
+    <option value="Ireland">Ireland</option>
+    <option value="Juvenile Fiction">Juvenile Fiction</option>
+    <option value="Children's stories, English">Children's stories, English</option>
+    <option value="Male friendship">Male friendship</option>
+    <option value="Literary Collections">Literary Collections</option>
+    <option value="Beresford, Tommy (Fictitious character)">Beresford, Tommy (Fictitious character)</option>
+    <option value="Imaginary wars and battles">Imaginary wars and battles</option>
+    <option value="Dysfunctional families">Dysfunctional families</option>
+    <option value="Poirot, Hercule (Fictitious character)">Poirot, Hercule (Fictitious character)</option>
+    <option value="Christmas stories">Christmas stories</option>
+    <option value="Marple, Jane (Fictitious character)">Marple, Jane (Fictitious character)</option>
+    <option value="Belgians">Belgians</option>
+    <option value="Battle, Superintendent (Fictitious character)">Battle, Superintendent (Fictitious character)</option>
+    <option value="Baggins, Frodo (Fictitious character)">Baggins, Frodo (Fictitious character)</option>
+    <option value="Cambridge (Mass.)">Cambridge (Mass.)</option>
+    <option value="Business enterprises">Business enterprises</option>
+    <option value="Emotional problems">Emotional problems</option>
+    <option value="Characters and characteristics in motion pictures">Characters and characteristics in motion pictures</option>
+    <option value="Fantasy fiction, English">Fantasy fiction, English</option>
+    <option value="Fairy tales, English">Fairy tales, English</option>
+    <option value="Hallucinogenic drugs">Hallucinogenic drugs</option>
+    <option value="Children's stories">Children's stories</option>
+    <option value="Parenthood">Parenthood</option>
+    <option value="FICTION">FICTION</option>
+    <option value="Biography & Autobiography">Biography & Autobiography</option>
+    <option value="Authors, American">Authors, American</option>
+    <option value="Vietnam War, 1961-1975">Vietnam War, 1961-1975</option>
+    <option value="Boys">Boys</option>
+    <option value="Computer programmers">Computer programmers</option>
+    <option value="Actors">Actors</option>
+    <option value="Friendship">Friendship</option>
+    <option value="Authors">Authors</option>
+    <option value="Costume">Costume</option>
+    <option value="African American plantation owners">African American plantation owners</option>
+    <option value="Conduct of life">Conduct of life</option>
+    <option value="Alienation (Social psychology)">Alienation (Social psychology)</option>
+    <option value="Cowboys">Cowboys</option>
+    <option value="Fairy tales">Fairy tales</option>
+    <option value="Christianity">Christianity</option>
+    <option value="Philosophy">Philosophy</option>
+    <option value="Language Arts & Disciplines">Language Arts & Disciplines</option>
+    <option value="History">History</option>
+    <option value="Animals, Treatment of">Animals, Treatment of</option>
+    <option value="Grandmothers">Grandmothers</option>
+    <option value="Business & Economics">Business & Economics</option>
+    <option value="Literary Criticism">Literary Criticism</option>
+    <option value="Science">Science</option>
+    <option value="Family & Relationships">Family & Relationships</option>
+    <option value="Juvenile Nonfiction">Juvenile Nonfiction</option>
+    <option value="African Americans in radio broadcasting">African Americans in radio broadcasting</option>
+    <option value="Poetry">Poetry</option>
+    <option value="Self-Help">Self-Help</option>
+    <option value="Sports & Recreation">Sports & Recreation</option>
+    <option value="True Crime">True Crime</option>
+    <option value="Psychology">Psychology</option>
+    <option value="Religion">Religion</option>
+    <option value="Travel">Travel</option>
+    <option value="Social Science">Social Science</option>
+    <option value="Health & Fitness">Health & Fitness</option>
+    <option value="Music">Music</option>
+    <option value="Comics & Graphic Novels">Comics & Graphic Novels</option>
+    <option value="Political science">Political science</option>
+    <option value="Medical">Medical</option>
+    <option value="Body, Mind & Spirit">Body, Mind & Spirit</option>
+    <option value="Education">Education</option>
+    <option value="Antiques & Collectibles">Antiques & Collectibles</option>
+    <option value="Young Adult Fiction">Young Adult Fiction</option>
+    <option value="Reference">Reference</option>
+    <option value="Art">Art</option>
+    <option value="Families">Families</option>
+    <option value="Humor">Humor</option>
+    <option value="Nature">Nature</option>
+    <option value="Foreign Language Study">Foreign Language Study</option>
+    <option value="Computers">Computers</option>
+    <option value="Heat">Heat</option>
+    <option value="Cosmology">Cosmology</option>
+    <option value="Physicists">Physicists</option>
+    <option value="Australian fiction">Australian fiction</option>
+    <option value="Australia">Australia</option>
+    <option value="Azerbaijan">Azerbaijan</option>
+    <option value="Dublin (Ireland)">Dublin (Ireland)</option>
+    <option value="Americans">Americans</option>
+    <option value="Slave insurrections">Slave insurrections</option>
+    <option value="Amis, Kingsley">Amis, Kingsley</option>
+    <option value="Dangerously mentally ill">Dangerously mentally ill</option>
+    <option value="American literature">American literature</option>
+    <option value="Life on other planets">Life on other planets</option>
+    <option value="Anger">Anger</option>
+    <option value="Comedy">Comedy</option>
+    <option value="Alzheimer's disease">Alzheimer's disease</option>
+    <option value="College teachers">College teachers</option>
+    <option value="Essays">Essays</option>
+    <option value="Mothers and sons">Mothers and sons</option>
+    <option value="Atonement">Atonement</option>
+    <option value="Badgers">Badgers</option>
+    <option value="Gangs">Gangs</option>
+    <option value="Human behavior">Human behavior</option>
+    <option value="Social action">Social action</option>
+    <option value="Horror">Horror</option>
+    <option value="Galicia (Spain : Region)">Galicia (Spain : Region)</option>
+    <option value="Businesswomen">Businesswomen</option>
+    <option value="Domestic fiction">Domestic fiction</option>
+    <option value="Japan">Japan</option>
+    <option value="Crime investigation">Crime investigation</option>
+    <option value="Authors, German">Authors, German</option>
+    <option value="Short stories, American">Short stories, American</option>
+    <option value="Short stories">Short stories</option>
+    <option value="African Americans">African Americans</option>
+    <option value="Exorcism">Exorcism</option>
+    <option value="Europe">Europe</option>
+    <option value="Horror tales">Horror tales</option>
+    <option value="Cults">Cults</option>
+    <option value="Divorced women">Divorced women</option>
+    <option value="Bracelets">Bracelets</option>
+    <option value="Death">Death</option>
+    <option value="Egyptologists">Egyptologists</option>
+    <option value="Demonology">Demonology</option>
+    <option value="Alcoholics">Alcoholics</option>
+    <option value="Feature films [DVD]">Feature films [DVD]</option>
+    <option value="Brothers">Brothers</option>
+    <option value="England">England</option>
+    <option value="Adultery">Adultery</option>
+    <option value="Accidents">Accidents</option>
+    <option value="Christmas">Christmas</option>
+    <option value="World War, 1914-1918">World War, 1914-1918</option>
+    <option value="College attendance">College attendance</option>
+    <option value="London (England)">London (England)</option>
+    <option value="Children of the rich">Children of the rich</option>
+    <option value="Literature">Literature</option>
+    <option value="City and town life">City and town life</option>
+    <option value="Classical fiction">Classical fiction</option>
+    <option value="War">War</option>
+    <option value="Historical fiction">Historical fiction</option>
+    <option value="Igbo (African people)">Igbo (African people)</option>
+    <option value="Law">Law</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Ghost stories, American">Ghost stories, American</option>
+    <option value="Autobiographical fiction">Autobiographical fiction</option>
+    <option value="Pigeons">Pigeons</option>
+    <option value="Electrons">Electrons</option>
+    <option value="Existential psychotherapy">Existential psychotherapy</option>
+    <option value="Albigenses">Albigenses</option>
+    <option value="Sex">Sex</option>
+    <option value="Child analysis">Child analysis</option>
+    <option value="Tobruk, Battles of, 1941-1942">Tobruk, Battles of, 1941-1942</option>
+    <option value="Latin America">Latin America</option>
+    <option value="Drama">Drama</option>
+    <option value="Confucianism">Confucianism</option>
+    <option value="Performing Arts">Performing Arts</option>
+    <option value="BIOGRAPHY & AUTOBIOGRAPHY">BIOGRAPHY & AUTOBIOGRAPHY</option>
+    <option value="British">British</option>
+    <option value="English">English</option>
+    <option value="Humorous stories, English">Humorous stories, English</option>
+    <option value="Authors, Italian">Authors, Italian</option>
+    <option value="Canadian wit and humor">Canadian wit and humor</option>
+    <option value="Obesity">Obesity</option>
+    <option value="High schools">High schools</option>
+    <option value="English poetry">English poetry</option>
+    <option value="Amour - Ouvrages avant 1800">Amour - Ouvrages avant 1800</option>
+    <option value="Candy">Candy</option>
+    <option value="Courtship">Courtship</option>
+    <option value="Dracula, Count (Fictitious character)">Dracula, Count (Fictitious character)</option>
+    <option value="Bond, James (Fictitious character)">Bond, James (Fictitious character)</option>
+    <option value="Dead">Dead</option>
+    <option value="Cabrillo, Juan (Fictitious character)">Cabrillo, Juan (Fictitious character)</option>
+    <option value="Cookery">Cookery</option>
+    <option value="Jews">Jews</option>
+    <option value="Children of Holocaust survivors">Children of Holocaust survivors</option>
+    <option value="American wit and humor">American wit and humor</option>
+    <option value="Experimental fiction, American">Experimental fiction, American</option>
+    <option value="Argentine literature">Argentine literature</option>
+    <option value="Novelists, American">Novelists, American</option>
+    <option value="Men">Men</option>
+    <option value="Czechoslovakia">Czechoslovakia</option>
+    <option value="French drama">French drama</option>
+    <option value="Epidemics">Epidemics</option>
+    <option value="Repression (Psychology)">Repression (Psychology)</option>
+    <option value="Horror tales, American">Horror tales, American</option>
+    <option value="Mentally ill">Mentally ill</option>
+    <option value="Handicapped youth">Handicapped youth</option>
+    <option value="Sea monsters">Sea monsters</option>
+    <option value="Adirondack Mountains (N.Y.)">Adirondack Mountains (N.Y.)</option>
+    <option value="Design">Design</option>
+    <option value="Adult children">Adult children</option>
+    <option value="Folklore">Folklore</option>
+    <option value="Pets">Pets</option>
+    <option value="Experimental fiction">Experimental fiction</option>
+    <option value="Frontier and pioneer life">Frontier and pioneer life</option>
+    <option value="Agriculture">Agriculture</option>
+    <option value="First loves">First loves</option>
+    <option value="Kinetic theory of gases">Kinetic theory of gases</option>
+    <option value="Cancer">Cancer</option>
+    <option value="Curiosities and wonders">Curiosities and wonders</option>
+    <option value="Graphic novels">Graphic novels</option>
+    <option value="Erinyes (Greek mythology)">Erinyes (Greek mythology)</option>
+    <option value="Greek drama (Tragedy)">Greek drama (Tragedy)</option>
+    <option value="Presidents">Presidents</option>
+    <option value="Babytime resource">Babytime resource</option>
+    <option value="Little, Stuart (Fictitious character)">Little, Stuart (Fictitious character)</option>
+    <option value="Horror tales, English">Horror tales, English</option>
+    <option value="Fantasy">Fantasy</option>
+    <option value="Beowulf">Beowulf</option>
+    <option value="Baggins, Bilbo (Fictitious character)">Baggins, Bilbo (Fictitious character)</option>
+    <option value="Zero (The number)">Zero (The number)</option>
+    <option value="Psychoanalysis and religion">Psychoanalysis and religion</option>
+    <option value="Poets, Chilean">Poets, Chilean</option>
+    <option value="Photography">Photography</option>
+    <option value="Animals">Animals</option>
+    <option value="Cooking">Cooking</option>
+    <option value="Art museum curators">Art museum curators</option>
+    <option value="United States">United States</option>
+    <option value="Bibles">Bibles</option>
+    <option value="Literary Criticism & Collections">Literary Criticism & Collections</option>
+    <option value="New England">New England</option>
+    <option value="Children's literature, French">Children's literature, French</option>
+    <option value="Authors, Canadian">Authors, Canadian</option>
+    <option value="Abandoned mines">Abandoned mines</option>
+    <option value="Air pilots">Air pilots</option>
+    <option value="Community life">Community life</option>
+    <option value="Rock musicians">Rock musicians</option>
+    <option value="Banks and banking, British">Banks and banking, British</option>
+    <option value="Brothers and sisters">Brothers and sisters</option>
+    <option value="Conspiracies">Conspiracies</option>
+    <option value="Egypt">Egypt</option>
+    <option value="Diary fiction">Diary fiction</option>
+    <option value="Bail bond agents">Bail bond agents</option>
+    <option value="Catholics">Catholics</option>
+    <option value="Political leadership">Political leadership</option>
+    <option value="Bosnia and Hercegovina">Bosnia and Hercegovina</option>
+    <option value="Mormon fundamentalism">Mormon fundamentalism</option>
+    <option value="American Wit And Humour">American Wit And Humour</option>
+    <option value="Cocaine industry">Cocaine industry</option>
+    <option value="Murder">Murder</option>
+    <option value="India">India</option>
+    <option value="Bombings">Bombings</option>
+    <option value="Autonomy (Psychology).">Autonomy (Psychology).</option>
+    <option value="Dent, Arthur (Fictitious character)">Dent, Arthur (Fictitious character)</option>
+    <option value="Paris (France)">Paris (France)</option>
+    <option value="Antislavery movements">Antislavery movements</option>
+    <option value="Books">Books</option>
+    <option value="Apartments">Apartments</option>
+    <option value="Actresses">Actresses</option>
+    <option value="Germany">Germany</option>
+    <option value="Adventure stories, English">Adventure stories, English</option>
+    <option value="Animal sanctuaries">Animal sanctuaries</option>
+    <option value="Adventure fiction">Adventure fiction</option>
+    <option value="Buddhism">Buddhism</option>
+    <option value="Bereavement">Bereavement</option>
+    <option value="Human-alien encounters">Human-alien encounters</option>
+    <option value="African American families">African American families</option>
+    <option value="God (Christianity)">God (Christianity)</option>
+    <option value="Motion picture plays">Motion picture plays</option>
+    <option value="Amnesia">Amnesia</option>
+    <option value="Star trek fiction">Star trek fiction</option>
+    <option value="Auschwitz (Poland : Concentration camp)">Auschwitz (Poland : Concentration camp)</option>
+    <option value="Cities and towns">Cities and towns</option>
+    <option value="Political fiction">Political fiction</option>
+    <option value="History, Modern">History, Modern</option>
+    <option value="Antisemitism">Antisemitism</option>
+    <option value="Popular culture">Popular culture</option>
+    <option value="Misogyny">Misogyny</option>
+    <option value="Apartheid">Apartheid</option>
+    <option value="Botswana">Botswana</option>
+    <option value="Man-woman relationships">Man-woman relationships</option>
+    <option value="Vice-Presidents">Vice-Presidents</option>
+    <option value="Intellectual disability facilities">Intellectual disability facilities</option>
+    <option value="France">France</option>
+    <option value="Gardening">Gardening</option>
+    <option value="Bible">Bible</option>
+    <option value="American poetry">American poetry</option>
+    <option value="Cooking, French">Cooking, French</option>
+    <option value="Occult fiction">Occult fiction</option>
+    <option value="Architecture">Architecture</option>
+    <option value="Caterpillars">Caterpillars</option>
+    <option value="Empiricism">Empiricism</option>
+    <option value="Intelligence service">Intelligence service</option>
+    <option value="Ryan, Jack (Fictitious character)">Ryan, Jack (Fictitious character)</option>
+    <option value="Arctic regions">Arctic regions</option>
+    <option value="Lecter, Hannibal (Fictitious character)">Lecter, Hannibal (Fictitious character)</option>
+    <option value="American drama">American drama</option>
+    <option value="Children's plays">Children's plays</option>
+    <option value="Dating (Social customs)">Dating (Social customs)</option>
+    <option value="Blind">Blind</option>
+    <option value="Animals, Mythical">Animals, Mythical</option>
+    <option value="Diaries">Diaries</option>
+    <option value="Babysitters Club (Imaginary organization)">Babysitters Club (Imaginary organization)</option>
+    <option value="Horror stories">Horror stories</option>
+    <option value="Trials (Witchcraft)">Trials (Witchcraft)</option>
+    <option value="Children's poetry, American">Children's poetry, American</option>
+    <option value="Ghost stories">Ghost stories</option>
+    <option value="Stone age">Stone age</option>
+    <option value="Alanna (Fictitious character : Pierce)">Alanna (Fictitious character : Pierce)</option>
+    <option value="Queens">Queens</option>
+    <option value="Los Angeles (Calif.)">Los Angeles (Calif.)</option>
+    <option value="Popular literature">Popular literature</option>
+    <option value="Television">Television</option>
+    <option value="Bullying">Bullying</option>
+    <!-- Add more genres here -->
+  </select>
+
+  <br><br>
+
+  <label for="published_year">Publication Year:</label>
+  <select id="published_year" name="published_year">
+  </select>
+
+  <br><br>
+
+  <label for="average_rating">Average Rating:</label>
+  <input type="range" id="average_rating" name="average_rating" min="2.5" max="5.0" step="0.1">
+  <p>Selected average rating: <span id="selectedRating">3.0</span></p>
+
+  <br><br>
+
+  <label for="comprehension">Comprehension Ability:</label>
+  <input type="range" id="comprehension" name="comprehension" min="0" max="4" value="2" step="1">
+  <p>Selected comprehension ability: <span id="selectedComprehension">Average</span></p>
+
+  <br><br>
+
+  <label for="enticement">Genre Enticement:</label>
+  <input type="range" id="enticement" name="enticement" min="0" max="2" value="1" step="1">
+  <p>Selected genre enticement: <span id="selectedEnticement">Average</span></p>
+
+  <br><br>
+
+  <!-- Hidden input field for num_pages with default value of 0 -->
+  <input type="hidden" id="num_pages" name="num_pages" value="0">
+
+  <div class="button-container">
+    <button id="pageCountPredictButton" class="button">Predict Page Count</button>
+    <div id="predictionContainer" class="prediction-result"></div>
+  </div>
+
+  <br><hr><br>
+</div>
+
+<footer>
+  <p>&copy; 2024 AI Services. All rights reserved.</p>
+</footer>
+
+<script>
+document.getElementById("pageCountPredictButton").addEventListener("click", function() {
+  var selectedGenre = document.getElementById("genre").value;
+  var selectedYear = document.getElementById("published_year").value;
+  var selectedRating = document.getElementById("average_rating").value;
+  var selectedComprehension = document.getElementById("selectedComprehension").textContent;
+  var selectedEnticement = document.getElementById("selectedEnticement").textContent;
+
+  // Get the default value of 0 for num_pages
+  var numPages = document.getElementById("num_pages").value;
+
+  var requestData = {
+    "genre": selectedGenre,
+    "published_year": selectedYear,
+    "average_rating": selectedRating,
+    "comprehension": selectedComprehension,
+    "enticement": selectedEnticement,
+    "num_pages": numPages // Include num_pages in the request data
+  };
+
+  fetch('/predict', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Response data:', data); // Log response data to console
+    var predictionResultElement = document.getElementById("predictionContainer");
+    if (data.error) {
+      predictionResultElement.innerHTML = "<span style='color: black;'>Error: " + data.error + "</span>"; // Change the color to black
+    } else {
+      if (data.predicted_page_count !== undefined) {
+        predictionResultElement.innerHTML = "<span>Predicted result is: " + Math.floor(data.predicted_page_count) + "</span>"; // Convert to integer
+      } else {
+        predictionResultElement.innerHTML = "<span style='color: black;'>Error: Unable to fetch predicted page count</span>";
+      }
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    var predictionResultElement = document.getElementById("predictionContainer");
+    predictionResultElement.innerHTML = "<span style='color: black;'>Error: Unexpected response format</span>"; // Change the color to black
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var currentYear = new Date().getFullYear();
+  var yearDropdown = document.getElementById("published_year");
+  for (var year = 1875; year <= currentYear; year++) {
+    var option = document.createElement("option");
+    option.text = year;
+    option.value = year;
+    yearDropdown.add(option);
+  }
+
+  var ratingSlider = document.getElementById("average_rating");
+  var ratingOutput = document.getElementById("selectedRating");
+  ratingSlider.oninput = function() {
+    var ratingValue = parseFloat(this.value);
+    ratingOutput.textContent = ratingValue.toFixed(1);
+  }
+
+  var comprehensionSlider = document.getElementById("comprehension");
+  var comprehensionOutput = document.getElementById("selectedComprehension");
+  comprehensionSlider.oninput = function() {
+    var comprehensionValue = parseInt(this.value);
+    var comprehensionText = ["Very Low", "Low", "Average", "High", "Very High"][comprehensionValue];
+    comprehensionOutput.textContent = comprehensionText;
+  }
+
+  var enticementSlider = document.getElementById("enticement");
+  var enticementOutput = document.getElementById("selectedEnticement");
+  enticementSlider.oninput = function() {
+    var enticementValue = parseInt(this.value);
+    var enticementText = ["Low", "Average", "High"][enticementValue];
+    enticementOutput.textContent = enticementText;
+  }
+});
+</script>
+<!-- Return to Home button -->
+<!-- Return to Home button -->
+<div class="button-container" style="position: absolute; top: 120px; left: 200px;">
+  <a href="/" class="button">Return to Home</a>
+</div>
+
+
+</body>
+</html>

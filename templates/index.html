@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Our AI and ML Services</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #45a049;
+  }
+  .introduction-box {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #ddd; /* Add a border */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add a shadow */
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to Our AI Services</h1>
+</header>
+
+<div class="container">
+  <div class="introduction-box">
+    <p>Wonder how cloud-based AI and ML tools empower your web applications? They are easy and yet insightful. Page count prediction utilizes AML to predict the page count of your favorite book based on its attributes. Image recognition leverages Azure Custom Vision to recognize LOTR characters, AWS Comprehend is there to scrutinize your text :)</p>
+  </div>
+  <div class="button-container">
+    <button class="button" onclick="redirectTo('predict_page')">Page Count Prediction</button>
+    <button class="button" onclick="redirectTo('image_recognition')">Image Recognition</button>
+    <button class="button" onclick="redirectTo('text_analysis')">Text Analysis</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 AI Services. All rights reserved.</p>
+</footer>
+
+<script>
+function redirectTo(url) {
+  window.location.href = '/' + url;
+}
+</script>
+
+</body>
+</html>

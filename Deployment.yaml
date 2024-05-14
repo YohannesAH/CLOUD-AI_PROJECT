@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thesisproject-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thesisproject
+  template:
+    metadata:
+      labels:
+        app: thesisproject
+    spec:
+      containers:
+        - name: thesisproject
+          image: yohannesah/thesisfinal:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thesisproject-service
+spec:
+  selector:
+    app: thesisproject
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort

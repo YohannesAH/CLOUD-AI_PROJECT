@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Recognition</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #45a049;
+  }
+  .result {
+    margin-top: 11px;
+  }
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #uploadedImageContainer {
+    margin-top: -20px; /* Adjust this value as needed */
+  }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>Image Recognition</h1>
+</header>
+
+<div class="container">
+  <!-- File input for uploading image -->
+  <form id="imageForm">
+    <label for="imageUpload">Upload Image:</label>
+    <input type="file" id="imageUpload" name="imageUpload">
+    <br><br>
+    <!-- Recognize button for image recognition -->
+    <button class="button" type="button" onclick="recognizeImage()">Recognize Image</button>
+  </form>
+
+  <!-- Display recognition result -->
+  <div class="result" id="recognitionResult"></div>
+</div>
+
+<!-- Parent container for uploaded image -->
+<div class="flex-container">
+  <!-- Display uploaded image -->
+  <div id="uploadedImageContainer"></div>
+</div>
+
+<div class="button-container">
+  <a href="/" class="button">Return to Home</a>
+</div>
+
+<footer>
+  <p>&copy; 2024 AI Services. All rights reserved.</p>
+</footer>
+
+<script>
+function recognizeImage() {
+  var fileInput = document.getElementById('imageUpload');
+  var file = fileInput.files[0];
+
+  if (!file) {
+    console.log("No image selected for recognition.");
+    return;
+  }
+
+  var formData = new FormData();
+  formData.append('file', file);
+
+  fetch('/recognize', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Recognition Result:', data);
+    // Display uploaded image
+    var uploadedImageContainer = document.getElementById("uploadedImageContainer");
+    uploadedImageContainer.innerHTML = "<img src='" + URL.createObjectURL(file) + "' style='max-width: 300px;'>";
+    // Display recognition result
+    displayRecognitionResult(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+function displayRecognitionResult(result) {
+  var recognitionResultContainer = document.getElementById("recognitionResult");
+  var html = "<h2>Recognition Result:</h2>";
+  if (result && result.predictions && result.predictions.length > 0) {
+    // Display only the first prediction
+    var firstPrediction = result.predictions[0];
+    html += "<p>" + firstPrediction.tagName + ": " + (firstPrediction.probability * 100).toFixed(2) + "%</p>";
+  } else {
+    html += "<p>No predictions found.</p>";
+  }
+  recognitionResultContainer.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

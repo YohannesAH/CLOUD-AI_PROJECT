@@ -3,7 +3,7 @@
 
 [Predicting page_count](docs/README1.md) <BR>
 
-[Recognizing characters](docs/README.md2) <BR>
+[Recognizing characters](docs/README2.md) <BR>
 
 [Text analysis](docs/README.md3)
 

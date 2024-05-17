@@ -3,6 +3,6 @@
 
 [Predicting_page_count](#predicting_page_count)  
 [Recognizing characters](#characters)  
-[Text analysis](#textanalysis)
+[Text analysi](#textanalysis)
 
 Awesome readme loading...

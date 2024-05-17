@@ -12,3 +12,4 @@
   <img src="https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/1f256129-7eda-4b3d-9de9-063005bf868b" alt="Untitled Diagram drawio">
 </div>
 
+### Requirements to Deployment

@@ -6,7 +6,7 @@
 [Text analysi](docs/README.md3)
 
 ### Architecture
-<div align = "center">
-<image src = "(https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/b2549b1a-563c-4582-8a03-c96f7cf4b45e)"alt="Untitled Diagram drawio">
-
+<div align="center">
+  <img src="https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/ea5ae26a-a74a-4520-822c-2d4e354293ae" alt="Untitled Diagram drawio">
 </div>
+

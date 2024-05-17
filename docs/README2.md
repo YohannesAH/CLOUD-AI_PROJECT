@@ -4,5 +4,5 @@
 using images of the characters the characters shall have enough set of images to acuquire enough set of images to identify suble differences. The format of the images can be 
 either of JPG, JPEG, PNG or other format the custom model accepts. here is a sample of the image format.
 <div align = "center">
-  <img src="docs/imagef.jpeg">
+  <img src="docs/imagef.jpeg" alt="Image title">
 </div>

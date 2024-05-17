@@ -9,8 +9,8 @@
 
 
 ### Architecture
-<div style="text-align: center;">
-  ![Untitled Diagram drawio](docs/image1.png)
+<div align="center">
+  <img src="docs/image1.png" alt="Untitled Diagram drawio">
 </div>
 
 ### Requirements to Deployment

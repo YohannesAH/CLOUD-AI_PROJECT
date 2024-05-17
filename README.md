@@ -7,4 +7,4 @@
 
 ### Architecture
 
-![Untitled Diagram drawio](https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/98e232d4-710a-4eb7-8213-69d291697621)
+![Untitled Diagram drawio](https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/84d213b0-2d98-4c29-b8f9-5c9f3816cbd2)

@@ -7,7 +7,7 @@
 
 ### Architecture
 <div align="center">
- <img src ="(https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/61c8274a-b5e0-44be-9ba2-894c20b8009c" alt="Untitled Diagram drawio">
+<img src="https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/61c8274a-b5e0-44be-9ba2-894c20b8009c" alt="Untitled Diagram drawio">
 </div>
 
 ### 

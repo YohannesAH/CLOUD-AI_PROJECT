@@ -9,8 +9,8 @@
 
 
 ### Architecture
-<div align="center">
-<img src="(https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/4145f39d-fc9a-46fc-a81a-a39c15b43203" alt="![Untitled Diagram drawio]">
+<div style="text-align: center;">
+  ![Untitled Diagram drawio](docs/image1.png)
 </div>
 
 ### Requirements to Deployment

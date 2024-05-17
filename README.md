@@ -5,4 +5,6 @@
 [Recognizing characters](docs/README.md2) <BR>
 [Text analysi](docs/README.md3)
 
-Awesome readme loading...
+### Architecture
+![Untitled Diagram drawio](https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/b92fda09-b61e-4f22-ac10-3d54cbb5d378)
+

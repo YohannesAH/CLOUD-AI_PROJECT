@@ -14,3 +14,4 @@
 </div>
 
 ### Requirements to Deployment
+#### Deploying a web application to local kubernities cluster(minikube) requires to use Dockerfile, deployment.yaml file and if user wants best security practices they are supposed to secure their credentials using kubernities secret or other securing mechanism. Each will be outlined next 

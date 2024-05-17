@@ -6,5 +6,5 @@
 [Text analysi](docs/README.md3)
 
 ### Architecture
-![Untitled Diagram drawio](https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/b92fda09-b61e-4f22-ac10-3d54cbb5d378)
 
+![Untitled Diagram drawio](https://github.com/YohannesAH/CLOUD-AI_PROJECT/assets/114959021/98e232d4-710a-4eb7-8213-69d291697621)

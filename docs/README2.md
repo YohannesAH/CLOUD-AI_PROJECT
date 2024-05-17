@@ -5,5 +5,5 @@ using images of the characters the characters shall have enough set of images to
 either of JPG, JPEG, PNG or other format the custom model accepts. here is a sample of the image format.
 
 <div align = "center">
-  <img src="docs/imagef.jpeg" alt="Image title">
+  <img src="imagef.jpeg" alt="Image title">
 </div>

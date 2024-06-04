@@ -5,4 +5,4 @@
   <img src="pagecount-prediction.png" alt="Image title">
 </div>
 The sample shown above demonestrate how to interact with the machine learning model trained on those key attributes to predict the page count of a book. 
-Users are allowed to choose the genre of the book from the drop down list, choose publication_year, 
+Users are allowed to choose the genre of the book from the drop down list, choose publication_year, rating, comprehensionability and genre enticement. Comprehensionability refers to how difficult is the book to comprehend some genres are known for being very difficult to comprehend and understand while others are very to grasp and summerize for example philosophical books, medical books, math books or political ideology books are difficult to analyse on the other hand childeren books or other guides such as cooking are simple to use and follow.

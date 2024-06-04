@@ -1,9 +1,8 @@
 ## CHARACTER RECOGNITION
 
-#### Recognizing few of the most notable characters from the fantacy trilogy of the movie "The lord of the rings" involve collecting, processing and training the custom vision
-using images of the characters the characters shall have enough set of images to acuquire enough set of images to identify suble differences. The format of the images can be 
-either of JPG, JPEG, PNG or other format the custom model accepts. here is a sample of the image format.
+#### Recognizing notable characters from the fantasy trilogy "The Lord of the Rings" involves collecting, processing, and training a machine learning model using custom vision. The model uses images of the characters, which need to be diverse and numerous enough to identify subtle differences. The images can be in JPG, JPEG, PNG, or other formats accepted by the custom model. Here is a sample of the image format.
 
 <div align = "center">
-  <img src="images2.jpg" alt="Image title">
+  <img src="image.gollum.png" alt="Image title">
 </div>
+The character could be recognized 100%

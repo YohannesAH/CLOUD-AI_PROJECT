@@ -4,4 +4,4 @@
 <div align = "center">
   <img src="pagecount-prediction.png" alt="Image title">
 </div>
-The sample shown above demonestrate how to interact with the machine learning model trained on those key attributes to predict the page count of a book. 
+The sample above demonstrates how to interact with the machine learning model trained on key attributes to predict a book's page count. Users can select the book's genre from a drop-down list, choose the publication year and rating, and adjust the comprehension difficulty and genre enticement using sliders. Comprehension difficulty refers to how challenging the book is to understand; for example, philosophical, medical, math, or political ideology books are typically more difficult to comprehend and analyze, while children's books or guides such as cookbooks are easier to follow. Genre enticement refers to how engaging and captivating the book is, with some books designed to create suspense and hold the reader's attention, while others are primarily educational. This interactive approach allows users to explore how different factors influence a book's page count.

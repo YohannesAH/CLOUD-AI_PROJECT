@@ -7,3 +7,4 @@ either of JPG, JPEG, PNG or other format the custom model accepts. here is a sam
 <div align = "center">
   <img src="image.gollum.png" alt="Image title">
 </div>
+The character could be recognized 100%

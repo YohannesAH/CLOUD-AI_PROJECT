@@ -4,3 +4,4 @@
 <div align = "center">
   <img src="pagecount-prediction.png" alt="Image title">
 </di
+### The sample shown above demonestrate how to interact with the machine learning model trained on those key attributes to predict the page count of a book. 

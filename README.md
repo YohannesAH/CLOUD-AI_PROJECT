@@ -5,7 +5,7 @@
 
 [Recognizing characters](docs/README2.md) <BR>
 
-[Text analysis](docs/README.md3)
+[Text analysis](docs/README3.md)
 
 
 ### ARCHITECTURE

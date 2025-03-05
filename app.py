@@ -22,11 +22,11 @@ allowSelfSignedHttps(True)
 AML_URL = os.environ.get('AML_URL')
 AML_API_KEY = os.environ.get('AML_API_KEY')
 
-# Custom Vision endpoint and key
+# Custom Vision endpoint and key I retrieved
 CUSTOM_VISION_ENDPOINT = os.environ.get('CUSTOM_VISION_ENDPOINT')
 CUSTOM_VISION_API_KEY = os.environ.get('CUSTOM_VISION_API_KEY')
 
-# AWS credentials
+# AWS credentials 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME')
@@ -54,7 +54,7 @@ def image_recognition():
 def predict_page():
     return render_template('predict_page.html')
 
-# Here I define teh route for the text_analysis image
+# Here I define the route for the text_analysis image Dont forget :)
 @app.route('/text_analysis')
 def text_analysis():
     return render_template('text_analysis.html')

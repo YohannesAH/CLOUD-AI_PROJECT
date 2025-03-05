@@ -29,12 +29,12 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    text-align: center; /* Add this line to center the content horizontally */
-    position: relative; /* Add this line to make it a positioning context */
+    text-align: center; /* I have added this line to center the content horizontally */
+    position: relative; /* I have added this line to make it a positioning context */
   }
   .button-container {
     position: absolute; /* Add this line to position the button container */
-    top: 388px; /* Adjust the top position as needed */
+    top: 388px; /* Adjust the top position */
     left: 50%; /* Center the container horizontally */
     transform: translateX(-50%); /* Center the container horizontally */
   }
@@ -73,11 +73,11 @@
 <header>
   <h1>Page Count Prediction</h1>
 </header>
-
+ <!-- Might seem a little verbous but I did this to make it comprehensive -->
 <div class="container">
   <label for="genre">Genre:</label>
   <select id="genre" name="genre">
-    <option value="Fiction">Fiction</option>
+    <option value="Fiction">Fiction</option> 
     <option value="Detective and mystery stories">Detective and mystery stories</option>
     <option value="American fiction">American fiction</option>
     <option value="Christian life">Christian life</option>
@@ -397,7 +397,7 @@
     <option value="Popular literature">Popular literature</option>
     <option value="Television">Television</option>
     <option value="Bullying">Bullying</option>
-    <!-- Add more genres here -->
+   
   </select>
 
   <br><br>
@@ -475,13 +475,13 @@ document.getElementById("pageCountPredictButton").addEventListener("click", func
     return response.json();
   })
   .then(data => {
-    console.log('Response data:', data); // Log response data to console
+    console.log('Response data:', data); // Just curious to find the logging response to console
     var predictionResultElement = document.getElementById("predictionContainer");
     if (data.error) {
       predictionResultElement.innerHTML = "<span style='color: black;'>Error: " + data.error + "</span>"; // Change the color to black
     } else {
       if (data.predicted_page_count !== undefined) {
-        predictionResultElement.innerHTML = "<span>Predicted result is: " + Math.floor(data.predicted_page_count) + "</span>"; // Convert to integer
+        predictionResultElement.innerHTML = "<span>Predicted result is: " + Math.floor(data.predicted_page_count) + "</span>"; // Convert value to integer
       } else {
         predictionResultElement.innerHTML = "<span style='color: black;'>Error: Unable to fetch predicted page count</span>";
       }
@@ -530,7 +530,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 </script>
-<!-- Return to Home button -->
 <!-- Return to Home button -->
 <div class="button-container" style="position: absolute; top: 120px; left: 200px;">
   <a href="/" class="button">Return to Home</a>
